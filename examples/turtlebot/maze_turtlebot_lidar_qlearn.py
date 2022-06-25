@@ -24,8 +24,9 @@ if __name__ == '__main__':
     env = gym.make('GazeboMazeTurtlebotLidar-v0')
 
     outdir = '/tmp/gazebo_gym_experiments'
-    env = gym.wrappers.Monitor(env, outdir, force=True)
-    plotter = liveplot.LivePlot(outdir)
+    #env = gym.wrappers.Monitor(env, outdir, force=True)
+    env = gym.wrappers.RecordEpisodeStatistics(env)
+    #plotter = liveplot.LivePlot(outdir)
 
     last_time_steps = numpy.ndarray(0)
 
@@ -70,7 +71,8 @@ if __name__ == '__main__':
 
             qlearn.learn(state, action, reward, nextState)
 
-            env._flush(force=True)
+            #env._flush(force=True)
+            #env.reset()
 
             if not(done):
                 state = nextState
@@ -78,8 +80,8 @@ if __name__ == '__main__':
                 last_time_steps = numpy.append(last_time_steps, [int(i + 1)])
                 break
 
-        if x%100==0:
-            plotter.plot(env)
+        #if x%100==0:
+            #plotter.plot(env)
 
         m, s = divmod(int(time.time() - start_time), 60)
         h, m = divmod(m, 60)

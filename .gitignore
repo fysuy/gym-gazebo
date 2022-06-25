@@ -38,7 +38,6 @@ tutorial/*.html
 vizdoom.ini
 
 # Gazebo project files
-catkin_ws/
 apm/
 sophus/
 eeprom.bin
@@ -47,3 +46,5 @@ mav.tlog.raw
 mav.parm
 terrain/
 Theano/
+
+catkin_ws/
